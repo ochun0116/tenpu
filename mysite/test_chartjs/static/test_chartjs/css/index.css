@@ -1,0 +1,76 @@
+h2 {
+    border-left: 5px solid #ff5900;
+    background-color: #fdece3;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 20px;
+    color: gray;
+  }
+  h2::before {
+    font-family: "Font Awesome 5 Free";
+    content: '\f00c';
+    font-weight: 900;
+    padding: 10px;
+  }
+  
+  /* article */
+  .article a::before {
+    font-family: "Font Awesome 5 Free";
+    content: '\f164';
+    font-weight: 400;
+    padding: 10px;
+  }
+  .article ul {
+    margin: 0px;
+    padding: 0px;
+  }
+  .article li {
+    display: inline-block;
+    list-style: none;
+    padding: 10px;
+    user-select: none;
+  }
+  .article li:hover {
+    background-color: whitesmoke;
+  }
+  .article a {
+    text-decoration: none;
+    color: gray;
+    padding-right: 15px;
+  }
+  .article a span {
+    display: inline;
+    font-size: small;
+    color: inherit;
+    padding: 0px;
+  }
+  .article {
+    position: relative;
+    margin: 2em 0;
+    padding: 25px 10px 7px;
+    border: solid 2px #FFC107;
+  }
+  .article .title {
+    position: absolute;
+    display: inline-block;
+    top: -2px;
+    left: -2px;
+    padding: 0 9px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 17px;
+    background: #FFC107;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  .article p {
+    margin: 20px; 
+    padding: 0px;
+  }
+  .article p.author {
+    font-size: small;
+    text-align: right;
+    color: lightgray;
+  }
+  

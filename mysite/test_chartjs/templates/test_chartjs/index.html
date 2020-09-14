@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'test_chartjs/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'test_chartjs/css/index.css' %}">
+
+    <!-- chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <!-- likes -->
+    <script src="{% static 'test_chartjs/js/ajax.js' %}" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+
+    <!-- for ajax -->
+    <script>let myurl = {"base": "{% url 'index' %}"};</script>
+
+</head>
+<body>
+
+ <!-- likes -->
+ <div id="container">
+    <div id="main">
+        <!-- likes -->
+        <h2>いいね！機能</h2>
+        {% for idx, row in articles.iterrows %}
+            <div class="article">
+                <span class="title">{{ row.title }}</span>
+                <p>{{ row.note }}</p>
+                <ul>
+                    {% if row.is_like == 1 %}
+                        <li><a role="button" aria-pressed="true" onclick="likes(event, '1', '{{ row.id }}')">いいね！<span>({{ row.likes_cnt }})</span></a></li>
+                    {% else %}
+                        <li><a role="button" aria-pressed="false" onclick="likes(event, '1', '{{ row.id }}')">いいね！<span>({{ row.likes_cnt }})</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+   <!-- Django to Javascript -->
+   <script>
+    var month_code = [];
+    var sales = [];
+</script>
+{% if latest_list %}
+    {% for i in latest_list %}
+        <script>
+            month_code.push("{{ i.month_code }}")
+            sales.push("{{ i.sales }}");
+        </script>
+    {% endfor %}
+{% else %}
+    <p>latest_listのデータがありませんでした</p>
+{% endif %}
+
+<!-- chart.js -->
+<canvas id="myChart"></canvas>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: month_code,
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: sales
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+</script>
+
+</body>
+</html>
